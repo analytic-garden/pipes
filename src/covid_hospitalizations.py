@@ -26,7 +26,7 @@ def main():
     df['New Covid Cases'] = df['Patients Newly Admitted'] + df['Patients Positive After Admission']
     df['Moving Average'] = df['New Covid Cases'].rolling(window = lag).mean()
     df = df.reset_index()
-    df['Moving Average'].dropna(inplace = True)
+    df = df.dropna()
     df = df[['As of Date', 'New Covid Cases', 'Moving Average']]
     df = df.sort_values(['As of Date'], ascending = 0)
     

@@ -30,6 +30,7 @@ def main():
         .reset_index()
         .assign(New_Covid_Cases = lambda x: x['Patients Newly Admitted'] + x['Patients Positive After Admission'])
         .assign(Moving_Average = lambda x: x['New_Covid_Cases'].rolling(window = lag).mean())
+        .dropna()
         .filter(['As_of_Date', 'New_Covid_Cases', 'Moving_Average'])
         .sort_values(['As_of_Date'], ascending = 0)
     )
